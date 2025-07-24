@@ -22,7 +22,7 @@ const cryptoData: Crypto[] = [
   { ticker: 'KMNO', price: 0.05589, amount: 12346, staked: false },
 ];
 
-export default function Home() {
+export default function CryptoPage() {
   return (
     <Box sx={{ p: 2, height: '93vh' }}>
       <CryptoMobileCard cryptoData={cryptoData} />

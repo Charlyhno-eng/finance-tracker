@@ -6,11 +6,11 @@ import { generateColors } from '@/utils/reusableFunctions';
 
 Chart.register(PieController, ArcElement, Tooltip, Legend, CategoryScale);
 
-type CryptoPieChartProps = {
+type PieChartProps = {
   data: { label: string; value: number }[];
 };
 
-export default function CryptoPieChart({ data }: CryptoPieChartProps) {
+export default function PieChart({ data }: PieChartProps) {
   const chartRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {

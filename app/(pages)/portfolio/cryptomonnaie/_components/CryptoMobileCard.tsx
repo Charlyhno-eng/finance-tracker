@@ -23,7 +23,6 @@ export default function CryptoMobileCard({ cryptoData }: Props) {
         </Typography>
       </CustomCard>
 
-
       <CustomCard title="Mon wallet">
         <Table size="small">
           <TableHead>

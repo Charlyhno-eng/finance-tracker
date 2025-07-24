@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Box, Drawer, List, ListItemButton, ListItemIcon, ListItemText, Collapse, Typography, IconButton, AppBar, Toolbar } from '@mui/material';
-import { Dashboard, AccountBalanceWallet, TrendingUp, ShowChart, ExpandLess, ExpandMore, AccountBalance, CurrencyBitcoin, CreditCard, Menu as MenuIcon } from '@mui/icons-material';
+import { Dashboard, AccountBalanceWallet, TrendingUp, ExpandLess, ExpandMore, AccountBalance, CurrencyBitcoin, CreditCard, Menu as MenuIcon } from '@mui/icons-material';
 
 export default function SidebarMobile() {
   const [openPortfolio, setOpenPortfolio] = useState(false);
@@ -94,13 +94,6 @@ export default function SidebarMobile() {
             </ListItemButton>
           </List>
         </Collapse>
-
-        <ListItemButton sx={{ color: '#ddd' }} onClick={() => handleNavigation('/graphiques')}>
-          <ListItemIcon sx={{ color: '#bb86fc' }}>
-            <ShowChart />
-          </ListItemIcon>
-          <ListItemText primary="Graphiques" />
-        </ListItemButton>
       </List>
     </Box>
   );

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Box, Drawer, List, ListItemButton, ListItemIcon, ListItemText, Collapse, Typography } from '@mui/material';
-import { Dashboard, AccountBalanceWallet, TrendingUp, ShowChart, ExpandLess, ExpandMore, AccountBalance, CurrencyBitcoin, CreditCard } from '@mui/icons-material';
+import { Dashboard, AccountBalanceWallet, TrendingUp, ExpandLess, ExpandMore, AccountBalance, CurrencyBitcoin, CreditCard } from '@mui/icons-material';
 
 export default function SidebarDesktop() {
   const [openPortfolio, setOpenPortfolio] = useState(false);
@@ -103,13 +103,6 @@ export default function SidebarDesktop() {
             </ListItemButton>
           </List>
         </Collapse>
-
-        <ListItemButton sx={{ color: '#ddd' }} onClick={() => handleNavigation('/graphiques')}>
-          <ListItemIcon sx={{ color: '#bb86fc' }}>
-            <ShowChart />
-          </ListItemIcon>
-          <ListItemText primary="Graphiques" />
-        </ListItemButton>
       </List>
     </Drawer>
   );
