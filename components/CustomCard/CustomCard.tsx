@@ -1,8 +1,15 @@
 'use client';
 
-import { Card, CardContent, Typography, Box } from '@mui/material';
+import { Card, CardContent, Typography, Box, SxProps, Theme } from '@mui/material';
 
-export default function CustomCard({ title, subtitle, children }: { title?: string; subtitle?: string; children?: React.ReactNode }) {
+interface CustomCardProps {
+  title?: string;
+  subtitle?: string;
+  children?: React.ReactNode;
+  sx?: SxProps<Theme>;
+}
+
+export default function CustomCard({ title, subtitle, children, sx }: CustomCardProps) {
   return (
     <Card
       sx={{
@@ -12,6 +19,7 @@ export default function CustomCard({ title, subtitle, children }: { title?: stri
         border: '1px solid rgba(255, 255, 255, 0.1)',
         color: '#fff',
         p: 2,
+        ...sx,
       }}
     >
       <CardContent>

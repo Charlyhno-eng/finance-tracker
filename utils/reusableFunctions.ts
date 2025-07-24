@@ -38,3 +38,33 @@ export function getLast12MonthsLabels(): string[] {
 
   return labels;
 }
+
+/**
+ * Generates an array of hexadecimal color strings in neon blue and purple tones,
+ * based on a predefined palette. If the requested number of colors exceeds the
+ * palette size, the colors are reused in a loop.
+ *
+ * @param {number} count - The total number of colors to generate.
+ * @returns {string[]} An array of hex color strings.
+ */
+export function generateColors(count: number): string[] {
+  const baseColors = [
+    '#7F00FF',
+    '#00BFFF',
+    '#8A2BE2',
+    '#1E90FF',
+    '#9932CC',
+    '#00FFFF',
+    '#DA70D6',
+    '#6495ED',
+    '#BA55D3',
+    '#5F9EA0',
+  ];
+
+  const colors = [];
+  for (let i = 0; i < count; i++) {
+    colors.push(baseColors[i % baseColors.length]);
+  }
+
+  return colors;
+}
