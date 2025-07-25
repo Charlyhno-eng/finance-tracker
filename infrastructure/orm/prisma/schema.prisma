@@ -10,8 +10,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:../../database/db.sqlite"
 }
 
 enum TypeTransaction {
@@ -19,28 +19,19 @@ enum TypeTransaction {
   DEPENSE
 }
 
-enum CategorieTransaction {
-  ESSENCE
-  COURSE
-  LOYER
-  FRAIS_DE_BANQUE
-  LOISIRS
-  MEDECIN
-  ASSURANCE
-  TRANSPORT
-  SALAIRE
-  PRIME
-  CHEQUE
-  REMBOURSEMENT
-  VIREMENT
+model CategorieTransaction {
+  id           Int           @id @default(autoincrement())
+  nom          String        @unique
+  transactions Transaction[]
 }
 
 model Transaction {
-  id        Int                 @id @default(autoincrement())
-  type      TypeTransaction
-  categorie CategorieTransaction
-  montant   Float
-  date      DateTime
+  id          Int                   @id @default(autoincrement())
+  type        TypeTransaction
+  montant     Float
+  date        DateTime
+  categorieId Int
+  categorie   CategorieTransaction @relation(fields: [categorieId], references: [id])
 }
 
 model Compte {
