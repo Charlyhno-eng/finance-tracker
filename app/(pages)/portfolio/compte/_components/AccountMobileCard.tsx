@@ -3,11 +3,10 @@
 import { Box, Typography } from '@mui/material';
 import CustomCard from '@/components/CustomCard/CustomCard';
 import { Props } from '../page';
+import { calculateTotalAmount } from '@/core/domain/finance/calculateTotalAmount';
 
 export default function AccountMobileCard({ accountData }: Props) {
-  const total = accountData.reduce(
-    (acc, account) => acc + account.amount, 0
-  );
+  const total: number = calculateTotalAmount(accountData);
 
   return (
     <Box sx={{ display: { xs: 'block', md: 'none' }, mt: 4 }}>

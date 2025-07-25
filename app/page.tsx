@@ -2,20 +2,15 @@
 
 import { Box, Grid, Typography } from '@mui/material';
 import CustomCard from '@/components/CustomCard/CustomCard';
-import { formatDate } from '@/utils/reusableFunctions';
-import { getLast12MonthsLabels } from '@/utils/reusableFunctions';
+import { formatDate, getLast12MonthsLabels } from '@/shared/helpers';
 import ExpensesPolarChart from '@/components/Charts/MainPage/ExpensesPolarChart/ExpensesPolarChart';
 import WealthEvolutionChart from '@/components/Charts/MainPage/WealthEvolutionChart/WealthEvolutionChart';
-
-const labels = getLast12MonthsLabels();
 
 const compte = [ 15000, 16200, 17500, 18800, 20050, 21300, 22700, 23000, 24250, 25500, 26800, 28000];
 const crypto = [ 52000, 48000, 39000, 34000, 39000, 47000, 50000, 52050, 49000, 51000, 48500, 50500];
 const bourse = [ 19500, 19600, 19400, 19700, 19550, 19800, 19650, 19750, 19500, 19450, 19600, 19800];
 
 export default function Home() {
-  const today = formatDate(new Date());
-
   return (
     <Box sx={{ p: 2, height: '93vh' }}>
       {/* Mobile : uniquement Patrimoine total */}
@@ -37,12 +32,31 @@ export default function Home() {
       {/* Desktop (md+) : layout complet */}
       <Box sx={{ display: { xs: 'none', md: 'block' }, height: '100%' }}>
         <Grid container spacing={2} sx={{ height: '100%' }}>
-          {/* Right part */}
+          {/* Left part */}
           <Grid size={{ xs: 12, md: 8 }} sx={{ height: '100%' }}>
-            <CustomCard title="Évolution du patrimoine" subtitle={`Mise à jour : ${today}`} sx={{ height: '100%' }}>
+            <CustomCard title="Évolution du patrimoine" subtitle={`Mise à jour : ${formatDate(new Date())}`} sx={{ height: '100%' }}>
+              <Grid container spacing={2} sx={{ my: 6,  }}>
+                <Grid size={6}>
+                  <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>
+                    PnL total mensuel :
+                  </Typography>
+                  <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>
+                    PnL comptes mensuel :
+                  </Typography>
+                </Grid>
+                <Grid size={6}>
+                  <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>
+                    PnL cryptomonnaie mensuel :
+                  </Typography>
+                  <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>
+                    PnL bourse mensuel :
+                  </Typography>
+                </Grid>
+              </Grid>
+
               <Box sx={{ height: "100%" }}>
                 <WealthEvolutionChart
-                  labels={labels}
+                  labels={getLast12MonthsLabels()}
                   values={{ Compte: compte, Cryptomonnaie: crypto, Bourse: bourse }}
                   visibleLines={['Total', 'Compte', 'Cryptomonnaie', 'Bourse']}
                 />
@@ -50,7 +64,7 @@ export default function Home() {
             </CustomCard>
           </Grid>
 
-          {/* Left part */}
+          {/* Right part */}
           <Grid size={{ xs: 12, md: 4 }} sx={{ height: '100%' }}>
             <Grid container direction="column" spacing={2} sx={{ height: '100%' }}>
               <Grid size={12} sx={{ height: 'calc(25% - 8px)' }}>

@@ -2,24 +2,17 @@
 
 import { Typography, Box, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
 import CustomCard from '@/components/CustomCard/CustomCard';
-import { useUsdToEurConversion } from '@/hooks/useUsdToEurConversion';
 import { Props } from '../page';
+import { calculateTotalValue } from '@/core/domain/finance/calculateTotalValue';
 
 export default function CryptoMobileCard({ cryptoData }: Props) {
-  const { conversionRate } = useUsdToEurConversion();
-
-  const totalInUsd = cryptoData.reduce(
-    (acc, crypto) => acc + crypto.price * crypto.amount,
-    0
-  );
-
-  const totalInEur = conversionRate !== null ? totalInUsd * conversionRate : null;
+  const total: number = calculateTotalValue(cryptoData);
 
   return (
     <Box sx={{ display: { xs: 'block', md: 'none' }, mt: 4 }}>
       <CustomCard title="Valeur du wallet" sx={{ mb: 2 }}>
         <Typography sx={{ fontSize: 30, fontWeight: 'bold', color: '#7F00FF', letterSpacing: 1, fontFamily: "'Roboto', sans-serif" }}>
-          {totalInEur !== null ? totalInEur.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' €' : '-'}
+          {total.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €'}
         </Typography>
       </CustomCard>
 
@@ -45,7 +38,7 @@ export default function CryptoMobileCard({ cryptoData }: Props) {
                 >
                   <TableCell sx={{ color: '#fff' }}>{crypto.ticker}</TableCell>
                   <TableCell sx={{ color: '#fff' }}>
-                    {montant.toFixed(2)} $
+                    {montant.toFixed(2)} €
                   </TableCell>
                 </TableRow>
               );

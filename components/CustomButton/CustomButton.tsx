@@ -1,5 +1,3 @@
-'use client';
-
 import { Button, ButtonProps } from '@mui/material';
 
 export default function CustomButton(props: ButtonProps) {

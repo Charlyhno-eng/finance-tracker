@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Box, Drawer, List, ListItemButton, ListItemIcon, ListItemText, Collapse, Typography, IconButton, AppBar, Toolbar } from '@mui/material';
-import { Dashboard, AccountBalanceWallet, TrendingUp, ExpandLess, ExpandMore, AccountBalance, CurrencyBitcoin, CreditCard, Menu as MenuIcon } from '@mui/icons-material';
+import { Box, Drawer, List, ListItemButton, ListItemIcon, ListItemText, Collapse, Typography, IconButton, AppBar, Toolbar, Divider } from '@mui/material';
+import { Dashboard, AccountBalanceWallet, TrendingUp, ExpandLess, ExpandMore, AccountBalance, CurrencyBitcoin, CreditCard, Menu as MenuIcon, Settings } from '@mui/icons-material';
 
 export default function SidebarMobile() {
   const [openPortfolio, setOpenPortfolio] = useState(false);
@@ -40,9 +40,7 @@ export default function SidebarMobile() {
       }}
     >
       <Box sx={{ px: 1, mb: 3 }}>
-        <Typography variant="h6" fontWeight="bold" color="inherit">
-          Finance Tracker
-        </Typography>
+        <Typography variant="h6" fontWeight="bold" color="inherit">Finance Tracker</Typography>
       </Box>
 
       <List sx={{ flexGrow: 1 }}>
@@ -65,11 +63,7 @@ export default function SidebarMobile() {
             <TrendingUp />
           </ListItemIcon>
           <ListItemText primary="Portfolio" />
-          {openPortfolio ? (
-            <ExpandLess sx={{ color: '#bb86fc' }} />
-          ) : (
-            <ExpandMore sx={{ color: '#bb86fc' }} />
-          )}
+          {openPortfolio ? (<ExpandLess sx={{ color: '#bb86fc' }} />) : (<ExpandMore sx={{ color: '#bb86fc' }} /> )}
         </ListItemButton>
 
         <Collapse in={openPortfolio} timeout="auto" unmountOnExit>
@@ -95,6 +89,17 @@ export default function SidebarMobile() {
           </List>
         </Collapse>
       </List>
+
+      <Divider sx={{ my: 2, borderColor: 'rgba(255,255,255,0.1)' }} />
+
+      <List>
+        <ListItemButton sx={{ color: '#ddd' }} onClick={() => handleNavigation('/gestion')}>
+          <ListItemIcon sx={{ color: '#bb86fc' }}>
+            <Settings />
+          </ListItemIcon>
+          <ListItemText primary="Gestion" />
+        </ListItemButton>
+      </List>
     </Box>
   );
 
@@ -105,9 +110,7 @@ export default function SidebarMobile() {
           <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2 }}>
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div" color="inherit">
-            Finance Tracker
-          </Typography>
+          <Typography variant="h6" noWrap component="div" color="inherit">Finance Tracker</Typography>
         </Toolbar>
       </AppBar>
 

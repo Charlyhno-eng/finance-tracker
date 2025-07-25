@@ -5,7 +5,7 @@ import { Box, Table, TableBody, TableCell, TableHead, TableRow, TextField, Typog
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import CustomCard from '@/components/CustomCard/CustomCard';
-import { formatDate } from '@/utils/reusableFunctions';
+import { formatDate } from '@/shared/helpers';
 import { Props, Stock } from '../page';
 
 export default function StockMainChart({ stockData }: Props) {

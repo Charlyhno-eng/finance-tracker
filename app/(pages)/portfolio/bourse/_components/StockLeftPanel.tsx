@@ -4,18 +4,17 @@ import { Box, Grid, Typography } from '@mui/material';
 import CustomCard from '@/components/CustomCard/CustomCard';
 import PieChart from '@/components/Charts/PieChart/PieChart';
 import { Props } from '../page';
+import { calculateTotalValue } from '@/core/domain/finance/calculateTotalValue';
 
 export default function StockLeftPanel({ stockData }: Props) {
-  const totalInEur = stockData.reduce(
-    (acc, stock) => acc + stock.price * stock.amount, 0
-  );
+  const total: number = calculateTotalValue(stockData);
 
   return (
     <Grid container direction="column" spacing={2} sx={{ height: '100%' }}>
       <Grid size={12} sx={{ height: 'calc(25% - 8px)' }}>
         <CustomCard title="Valeur du PEA" sx={{ height: '100%' }}>
           <Typography sx={{ fontSize: 36, fontWeight: 'bold', color: '#7F00FF', letterSpacing: 1 }}>
-            {totalInEur.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}{' '}€
+            {total.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}{' '}€
           </Typography>
         </CustomCard>
       </Grid>

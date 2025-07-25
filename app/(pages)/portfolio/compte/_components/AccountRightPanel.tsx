@@ -1,11 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, Table, TableBody, TableCell, TableHead, TableRow, TextField, IconButton } from '@mui/material';
+import { Box, Table, TableBody, TableCell, TableHead, TableRow, TextField, Typography, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import CustomCard from '@/components/CustomCard/CustomCard';
-import { formatDate } from '@/utils/reusableFunctions';
+import { formatDate } from '@/shared/helpers';
 import { Props, Account } from '../page';
 
 export default function AccountMainChart({ accountData }: Props) {
@@ -59,14 +59,9 @@ export default function AccountMainChart({ accountData }: Props) {
                   />
                 </TableCell>
                 <TableCell sx={{ color: '#fff' }}>
-                  <TextField
-                    type="number"
-                    variant="standard"
-                    value={account.amount}
-                    onChange={(e) => handleChange(index, 'amount', parseFloat(e.target.value))}
-                    slotProps={{ input: { disableUnderline: true, sx: { color: '#fff' } } }}
-                    sx={{ width: '100%' }}
-                  />
+                  <Typography sx={{ color: '#fff' }}>
+                    {account.amount.toFixed(2)} €
+                  </Typography>
                 </TableCell>
                 <TableCell sx={{ color: '#fff', width: 48 }}>
                   <IconButton aria-label="delete" onClick={() => handleDelete(index)} size="small" sx={{ color: '#fff' }}>

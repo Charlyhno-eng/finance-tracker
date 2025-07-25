@@ -3,11 +3,10 @@
 import { Box, Typography } from '@mui/material';
 import CustomCard from '@/components/CustomCard/CustomCard';
 import { Props } from '../page';
+import { calculateTotalValue } from '@/core/domain/finance/calculateTotalValue';
 
 export default function StockMobileCard({ stockData }: Props) {
-  const total = stockData.reduce(
-    (acc, stock) => acc + stock.price * stock.amount, 0
-  );
+  const total: number = calculateTotalValue(stockData);
 
   return (
     <Box sx={{ display: { xs: 'block', md: 'none' }, mt: 4 }}>
@@ -24,12 +23,7 @@ export default function StockMobileCard({ stockData }: Props) {
             return (
               <Box
                 key={index}
-                sx={{
-                  bgcolor: 'rgba(103, 58, 183, 0.03)',
-                  p: '8px 12px',
-                  borderRadius: 1,
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                }}
+                sx={{ bgcolor: 'rgba(103, 58, 183, 0.03)', p: '8px 12px', borderRadius: 1, border: '1px solid rgba(255, 255, 255, 0.1)' }}
               >
                 <Typography sx={{ color: '#fff', fontWeight: 500 }}>
                   {stock.ticker}

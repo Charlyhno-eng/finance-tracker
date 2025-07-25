@@ -1,8 +1,6 @@
-'use client';
-
 import { useEffect, useRef } from 'react';
 import { Chart, PieController, ArcElement, Tooltip, Legend, CategoryScale } from 'chart.js';
-import { generateColors } from '@/utils/reusableFunctions';
+import { generateColors } from '@/shared/helpers';
 
 Chart.register(PieController, ArcElement, Tooltip, Legend, CategoryScale);
 

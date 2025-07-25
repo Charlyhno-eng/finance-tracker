@@ -13,3 +13,61 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum TypeTransaction {
+  REVENU
+  DEPENSE
+}
+
+enum CategorieTransaction {
+  ESSENCE
+  COURSE
+  LOYER
+  FRAIS_DE_BANQUE
+  LOISIRS
+  MEDECIN
+  ASSURANCE
+  TRANSPORT
+  SALAIRE
+  PRIME
+  CHEQUE
+  REMBOURSEMENT
+  VIREMENT
+}
+
+model Transaction {
+  id        Int                 @id @default(autoincrement())
+  type      TypeTransaction
+  categorie CategorieTransaction
+  montant   Float
+  date      DateTime
+}
+
+model Compte {
+  id      Int     @id @default(autoincrement())
+  nom     String
+  montant Float
+}
+
+model Cryptomonnaie {
+  id       Int     @id @default(autoincrement())
+  ticker   String
+  nom      String
+  quantite Float
+  stacking Boolean
+}
+
+model Action {
+  id       Int     @id @default(autoincrement())
+  ticker   String
+  nom      String
+  quantite Float
+}
+
+model Sauvegarde {
+  id           Int      @id @default(autoincrement())
+  date         DateTime
+  totalCompte  Float
+  totalCrypto  Float
+  totalBourse  Float
+}

@@ -1,8 +1,6 @@
-'use client';
-
 import { Card, CardContent, Typography, Box, SxProps, Theme } from '@mui/material';
 
-interface CustomCardProps {
+type CustomCardProps = {
   title?: string;
   subtitle?: string;
   children?: React.ReactNode;

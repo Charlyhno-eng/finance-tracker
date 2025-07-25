@@ -5,7 +5,7 @@ import { Box, Table, TableBody, TableCell, TableHead, TableRow, TextField, Selec
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import CustomCard from '@/components/CustomCard/CustomCard';
-import { formatDate } from '@/utils/reusableFunctions';
+import { formatDate } from '@/shared/helpers';
 import { Props, Crypto } from '../page';
 
 export default function CryptoMainChart({ cryptoData }: Props) {
@@ -63,9 +63,9 @@ export default function CryptoMainChart({ cryptoData }: Props) {
                       sx={{ width: '100%' }}
                     />
                   </TableCell><TableCell sx={{ color: '#fff' }}>
-                    <Typography sx={{ color: '#fff' }}>{montant.toFixed(2)} $</Typography>
+                    <Typography sx={{ color: '#fff' }}>{montant.toFixed(2)} €</Typography>
                   </TableCell><TableCell sx={{ color: '#fff' }}>
-                    <Typography sx={{ color: '#fff' }}>{crypto.price.toFixed(2)} $</Typography>
+                    <Typography sx={{ color: '#fff' }}>{crypto.price.toFixed(2)} €</Typography>
                   </TableCell><TableCell sx={{ color: '#fff' }}>
                     <TextField
                       type="number"
