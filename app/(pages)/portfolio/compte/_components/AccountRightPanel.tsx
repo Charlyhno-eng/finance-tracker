@@ -3,11 +3,9 @@
 import { useState } from 'react';
 import { Box, Table, TableBody, TableCell, TableHead, TableRow, TextField } from '@mui/material';
 import CustomCard from '@/components/CustomCard/CustomCard';
-import { formatDate } from '@/shared/helpers';
 import { Account } from '@/shared/types/types-compte';
 
 export default function AccountRightPanel({ accountData }: { accountData: Account[] }) {
-  const today = formatDate(new Date());
   const [data, setData] = useState<Account[]>(accountData);
 
   const handleChange = async (index: number, field: keyof Account, value: string | number) => {
@@ -38,13 +36,13 @@ export default function AccountRightPanel({ accountData }: { accountData: Accoun
   };
 
   return (
-    <CustomCard title="Mes comptes & livrets" subtitle={`Mise à jour : ${today}`} sx={{ height: '100%' }}>
+    <CustomCard title="Mes comptes & livrets" sx={{ height: '100%' }}>
       <Box sx={{ height: '100%', overflowY: 'auto' }}>
         <Table size="small" sx={{ minWidth: 400, mt: 2 }}>
           <TableHead>
             <TableRow sx={{ bgcolor: 'rgba(103, 58, 183, 0.05)' }}>
               <TableCell sx={{ color: '#fff' }}>Nom</TableCell>
-              <TableCell sx={{ color: '#fff' }}>Montant</TableCell>
+              <TableCell sx={{ color: '#fff' }}>Montant (en €)</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

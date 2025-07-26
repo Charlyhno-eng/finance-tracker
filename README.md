@@ -13,17 +13,13 @@ The main dashboard provides a comprehensive overview of your financial status:
 * **Portfolio Performance**: See the gains/losses of your **stock** and **crypto** investments.
 * **Current Month Expense Breakdown**: A polar chart displays how your expenses are distributed among different categories.
 
-### Transactions Page
+### Presentation of different pages
 
-A dedicated page for tracking all **income** and **expenses**. It allows you to:
+#### Account page
 
-* Add new transactions manually
-* Select a category (e.g. housing, food, transport)
-* See all transactions grouped by month
+![Account Page](./public/overview_account_page.png)
 
-This is useful for managing personal accounting and identifying where you could **reduce spending**.
-
-**Example Screenshot**:
+#### Transactions page
 
 ![Transactions Page](./public/overview_transactions_page.png)
 
