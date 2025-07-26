@@ -72,8 +72,7 @@ export default function TransactionsPage() {
       if (!groups[month]) groups[month] = [];
       groups[month].push(transaction);
       return groups;
-    },
-    {}
+    }, {}
   );
 
   return (

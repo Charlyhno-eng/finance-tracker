@@ -1,42 +1,38 @@
 import { useEffect, useRef } from 'react';
 import { Chart, PolarAreaController, RadialLinearScale, ArcElement, Tooltip, Legend } from 'chart.js';
+import { generateColors } from '@/shared/helpers';
 
 Chart.register(PolarAreaController, RadialLinearScale, ArcElement, Tooltip, Legend);
 
-export default function ExpensesPolarChart() {
+type Props = {
+  labels: string[];
+  data: number[];
+};
+
+export default function ExpensesPolarChart({ labels, data }: Props) {
   const chartRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     if (!chartRef.current) return;
 
+    const backgroundColors = generateColors(data.length);
+
     const chart = new Chart(chartRef.current, {
       type: 'polarArea',
       data: {
-        labels: ['Logement', 'Alimentation', 'Transport', 'Loisirs', 'Autres'],
-        datasets: [{
-          data: [400, 250, 350, 300, 250],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.5)',
-            'rgba(54, 162, 235, 0.5)',
-            'rgba(255, 205, 86, 0.5)',
-            'rgba(75, 192, 192, 0.5)',
-            'rgba(153, 102, 255, 0.5)'
-          ],
-        }],
+        labels,
+        datasets: [{ data, backgroundColor: backgroundColors }],
       },
       options: {
         responsive: true,
-        plugins: {
-          legend: { position: 'right' },
-          title: { display: false }
-        }
+        plugins: { legend: { position: 'right' }, title: { display: false } }
       }
     });
 
     return () => {
       chart.destroy();
     };
-  }, []);
+  }, [labels, data]);
 
   return <canvas ref={chartRef} />;
 }

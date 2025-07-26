@@ -3,7 +3,7 @@
 import { Box, Grid, Typography } from '@mui/material';
 import CustomCard from '@/components/CustomCard/CustomCard';
 import { formatDate, getLast12MonthsLabels } from '@/shared/helpers';
-import ExpensesPolarChart from '@/components/Charts/MainPage/ExpensesPolarChart/ExpensesPolarChart';
+import ExpensesPolarChartContainer from '@/components/Charts/MainPage/ExpensesPolarChart/ExpensesPolarChartContainer';
 import WealthEvolutionChart from '@/components/Charts/MainPage/WealthEvolutionChart/WealthEvolutionChart';
 
 const compte = [ 15000, 16200, 17500, 18800, 20050, 21300, 22700, 23000, 24250, 25500, 26800, 28000];
@@ -13,7 +13,7 @@ const bourse = [ 19500, 19600, 19400, 19700, 19550, 19800, 19650, 19750, 19500, 
 export default function Home() {
   return (
     <Box sx={{ p: 2, height: '93vh' }}>
-      {/* Mobile : uniquement Patrimoine total */}
+      {/* Mobile : only total assets */}
       <Box sx={{ mt: 6, display: { xs: 'block', md: 'none' } }}>
         <CustomCard title="Patrimoine total" sx={{ mb: 2 }}>
           <Typography variant="h6" fontWeight="medium">Total</Typography>
@@ -78,7 +78,7 @@ export default function Home() {
               <Grid size={12} sx={{ height: 'calc(75% - 8px)' }}>
                 <CustomCard title="Les dépenses" sx={{ height: '100%' }}>
                   <Box sx={{ height: '100%' }}>
-                    <ExpensesPolarChart />
+                    <ExpensesPolarChartContainer />
                   </Box>
                 </CustomCard>
               </Grid>

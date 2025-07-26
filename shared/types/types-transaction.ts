@@ -4,7 +4,7 @@ export type TransactionFromApi = {
   id: number;
   date: string;
   type: TypeTransaction;
-  categorie: { nom: string };
+  categorie: { id: number; nom: string; };
   montant: number;
 };
 
