@@ -9,13 +9,16 @@ export const prismaTransactionRepository: TransactionRepository = {
   },
 
   findAll: async () => {
-    return prisma.transaction.findMany()
+    return prisma.transaction.findMany({
+      include: { categorie: true },
+    });
   },
 
   findById: async (id) => {
     return prisma.transaction.findUnique({
       where: { id },
-    })
+      include: { categorie: true },
+    });
   },
 
   delete: async (id) => {

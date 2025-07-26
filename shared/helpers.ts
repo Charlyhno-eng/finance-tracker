@@ -14,6 +14,20 @@ export function formatDate(date: Date): string {
 }
 
 /**
+ * Formats a month string in "YYYY-MM" format into a localized short month and year string.
+ *
+ * @param {string} monthStr - The month string in the format "YYYY-MM".
+ * @returns {string} The formatted month and year (e.g., "Jan 2025").
+ */
+export const formatMonth = (monthStr: string) => {
+  const [year, month] = monthStr.split('-').map(Number);
+  return new Date(year, month - 1).toLocaleDateString('en-US', {
+    month: 'short',
+    year: 'numeric',
+  });
+};
+
+/**
  * Generates an array of the last 12 months formatted in French as "jan. 2024".
  *
  * @returns {string[]} An array of 12 strings representing the last 12 months,

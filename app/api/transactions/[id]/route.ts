@@ -15,5 +15,5 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 
 export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
   await removeTransaction(Number(params.id))
-  return NextResponse.json(null, { status: 204 })
+  return NextResponse.json(null, { status: 201 })
 }

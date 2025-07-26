@@ -177,7 +177,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../orm/prisma",
   "clientVersion": "6.12.0",

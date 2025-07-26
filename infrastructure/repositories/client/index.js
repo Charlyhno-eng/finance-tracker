@@ -178,7 +178,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../orm/prisma",
   "clientVersion": "6.12.0",
@@ -206,7 +206,7 @@ const fs = require('fs')
 config.dirname = __dirname
 if (!fs.existsSync(path.join(__dirname, 'schema.prisma'))) {
   const alternativePaths = [
-    "../repositories/client",
+    "infrastructure/repositories/client",
     "repositories/client",
   ]
   
@@ -237,7 +237,7 @@ Object.assign(exports, Prisma)
 
 // file annotations for bundling tools to include these files
 path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");
-path.join(process.cwd(), "../repositories/client/libquery_engine-debian-openssl-3.0.x.so.node")
+path.join(process.cwd(), "infrastructure/repositories/client/libquery_engine-debian-openssl-3.0.x.so.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
-path.join(process.cwd(), "../repositories/client/schema.prisma")
+path.join(process.cwd(), "infrastructure/repositories/client/schema.prisma")
