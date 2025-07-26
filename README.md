@@ -15,13 +15,23 @@ The main dashboard provides a comprehensive overview of your financial status:
 
 ### Presentation of different pages
 
+#### Main page
+
 #### Account page
 
 ![Account Page](./public/overview_account_page.png)
 
+#### Cryptocurrency page
+
+#### Stock Market page
+
 #### Transactions page
 
 ![Transactions Page](./public/overview_transactions_page.png)
+
+#### Config page
+
+---
 
 ### Portfolio Section
 
