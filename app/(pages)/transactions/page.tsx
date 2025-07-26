@@ -13,12 +13,12 @@ export default function TransactionsPage() {
   const [form, setForm] = useState<FormState>({ date: '', type: TypeTransaction.REVENU, category: '', amount: '' });
 
   useEffect(() => {
-    fetch('/api/categoriesTransaction')
+    fetch('/api/categorieTransaction')
       .then((res) => res.json())
       .then((data: Category[]) => setCategories(data))
       .catch(() => alert('Échec du chargement des catégories'));
 
-    fetch('/api/transactions')
+    fetch('/api/transaction')
       .then((res) => res.json())
       .then((data: TransactionFromApi[]) => setTransactions(data))
       .catch(() => alert('Échec du chargement des transactions'));
@@ -35,7 +35,7 @@ export default function TransactionsPage() {
     }
 
     try {
-      const response = await fetch('/api/transactions', {
+      const response = await fetch('/api/transaction', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -58,7 +58,7 @@ export default function TransactionsPage() {
 
   const handleDelete = async (id: number) => {
     try {
-      const res = await fetch(`/api/transactions/${id}`, { method: 'DELETE' });
+      const res = await fetch(`/api/transaction/${id}`, { method: 'DELETE' });
       if (!res.ok) throw new Error('Échec de la suppression');
       setTransactions((prev) => prev.filter((t) => t.id !== id));
     } catch (err) {

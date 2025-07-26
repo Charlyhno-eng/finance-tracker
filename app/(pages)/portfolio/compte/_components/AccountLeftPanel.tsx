@@ -3,18 +3,18 @@
 import { Box, Grid, Typography } from '@mui/material';
 import CustomCard from '@/components/CustomCard/CustomCard';
 import PieChart from '@/components/Charts/PieChart/PieChart';
-import { Props } from '../page';
+import { Account } from '@/shared/types/types-compte';
 import { calculateTotalAmount } from '@/core/domain/finance/calculateTotalAmount';
 
-export default function AccountLeftPanel({ accountData }: Props) {
-  const total: number = calculateTotalAmount(accountData);
+export default function AccountLeftPanel({ accountData }: { accountData: Account[] }) {
+  const total = calculateTotalAmount(accountData);
 
   return (
     <Grid container direction="column" spacing={2} sx={{ height: '100%' }}>
       <Grid size={12} sx={{ height: 'calc(25% - 8px)' }}>
         <CustomCard title="Valeur des comptes" sx={{ height: '100%' }}>
           <Typography sx={{ fontSize: 36, fontWeight: 'bold', color: '#7F00FF' }}>
-            {total.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}{' '}€
+            {total.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €
           </Typography>
         </CustomCard>
       </Grid>

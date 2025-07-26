@@ -2,10 +2,10 @@
 
 import { Box, Typography } from '@mui/material';
 import CustomCard from '@/components/CustomCard/CustomCard';
-import { Props } from '../page';
 import { calculateTotalAmount } from '@/core/domain/finance/calculateTotalAmount';
+import { Account } from '@/shared/types/types-compte';
 
-export default function AccountMobileCard({ accountData }: Props) {
+export default function AccountMobileCard({ accountData }: { accountData: Account[] }) {
   const total: number = calculateTotalAmount(accountData);
 
   return (

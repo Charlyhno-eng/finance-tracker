@@ -14,12 +14,12 @@ export default function ExpensesPolarChartContainer() {
   const [dataSet, setDataSet] = useState<DataSet>({ labels: [], data: [] });
 
   useEffect(() => {
-    fetch('/api/categoriesTransaction')
+    fetch('/api/categorieTransaction')
       .then(res => res.json())
       .then((cats: Category[]) => setCategories(cats))
       .catch(() => alert('Erreur chargement catégories'));
 
-    fetch('/api/transactions')
+    fetch('/api/transaction')
       .then(res => res.json())
       .then((txs: TransactionFromApi[]) => setTransactions(txs))
       .catch(() => alert('Erreur chargement transactions'));
@@ -29,8 +29,8 @@ export default function ExpensesPolarChartContainer() {
     if (transactions.length === 0 || categories.length === 0) return;
 
     const depenses = transactions.filter(tx => tx.type === TypeTransaction.DEPENSE);
-
     const sommeParCategorie: Record<number, number> = {};
+
     depenses.forEach(tx => {
       const catId = tx.categorie.id;
       sommeParCategorie[catId] = (sommeParCategorie[catId] || 0) + tx.montant;

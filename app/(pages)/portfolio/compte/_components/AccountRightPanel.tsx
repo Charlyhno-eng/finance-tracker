@@ -1,31 +1,40 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, Table, TableBody, TableCell, TableHead, TableRow, TextField, Typography, IconButton } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
+import { Box, Table, TableBody, TableCell, TableHead, TableRow, TextField } from '@mui/material';
 import CustomCard from '@/components/CustomCard/CustomCard';
 import { formatDate } from '@/shared/helpers';
-import { Props, Account } from '../page';
+import { Account } from '@/shared/types/types-compte';
 
-export default function AccountMainChart({ accountData }: Props) {
+export default function AccountRightPanel({ accountData }: { accountData: Account[] }) {
   const today = formatDate(new Date());
   const [data, setData] = useState<Account[]>(accountData);
 
-  const handleChange = (index: number, field: keyof Account, value: string | number) => {
+  const handleChange = async (index: number, field: keyof Account, value: string | number) => {
     const updated = [...data];
-    updated[index] = { ...updated[index], [field]: value };
-    setData(updated);
-  };
+    let parsedValue: string | number = value;
 
-  const handleDelete = (index: number) => {
-    const updated = [...data];
-    updated.splice(index, 1);
-    setData(updated);
-  };
+    if (field === 'amount') {
+      parsedValue = Number(value);
+      if (isNaN(parsedValue)) return;
+    }
 
-  const handleAdd = () => {
-    setData([...data, { ticker: '-', amount: 0 }]);
+    const updatedAccount = { ...updated[index], [field]: parsedValue };
+    updated[index] = updatedAccount;
+    setData(updated);
+
+    try {
+      await fetch(`/api/compte/${updatedAccount.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ticker: updatedAccount.ticker,
+          montant: updatedAccount.amount,
+        }),
+      });
+    } catch (error) {
+      alert((error as Error).message);
+    }
   };
 
   return (
@@ -36,13 +45,12 @@ export default function AccountMainChart({ accountData }: Props) {
             <TableRow sx={{ bgcolor: 'rgba(103, 58, 183, 0.05)' }}>
               <TableCell sx={{ color: '#fff' }}>Nom</TableCell>
               <TableCell sx={{ color: '#fff' }}>Montant</TableCell>
-              <TableCell sx={{ color: '#fff', width: 48 }}></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {data.map((account, index) => (
               <TableRow
-                key={index}
+                key={account.id}
                 sx={{
                   bgcolor: 'rgba(103, 58, 183, 0.03)',
                   border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -59,24 +67,17 @@ export default function AccountMainChart({ accountData }: Props) {
                   />
                 </TableCell>
                 <TableCell sx={{ color: '#fff' }}>
-                  <Typography sx={{ color: '#fff' }}>
-                    {account.amount.toFixed(2)} €
-                  </Typography>
-                </TableCell>
-                <TableCell sx={{ color: '#fff', width: 48 }}>
-                  <IconButton aria-label="delete" onClick={() => handleDelete(index)} size="small" sx={{ color: '#fff' }}>
-                    <DeleteIcon fontSize="small" />
-                  </IconButton>
+                  <TextField
+                    variant="standard"
+                    type="number"
+                    value={account.amount}
+                    onChange={(e) => handleChange(index, 'amount', e.target.value)}
+                    slotProps={{ input: { disableUnderline: true, sx: { color: '#fff' } } }}
+                    sx={{ width: '100%' }}
+                  />
                 </TableCell>
               </TableRow>
             ))}
-            <TableRow>
-              <TableCell colSpan={3} align="center">
-                <IconButton aria-label="add" onClick={handleAdd} sx={{ color: '#7F00FF' }}>
-                  <AddIcon />
-                </IconButton>
-              </TableCell>
-            </TableRow>
           </TableBody>
         </Table>
       </Box>

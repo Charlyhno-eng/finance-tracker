@@ -8,6 +8,10 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
   const id = parseInt(params.id, 10)
   const data = await request.json()
 
-  const updated = await update(id, data)
+  const updated = await update(id, {
+    nom: data.ticker,
+    montant: data.montant,
+  })
+
   return NextResponse.json(updated)
 }
