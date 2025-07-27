@@ -10,7 +10,10 @@ const end = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59);
 
 export const prismaTransactionRepository: TransactionRepository = {
   save: async (transactionData) => {
-    return prisma.transaction.create({ data: transactionData })
+    return prisma.transaction.create({
+      data: transactionData,
+      include: { categorie: true },
+    });
   },
 
   findAll: async () => {
