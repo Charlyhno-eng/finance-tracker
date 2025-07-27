@@ -3,6 +3,7 @@ import { Box, Typography, Paper, List, ListItem, ListItemText, Divider, IconButt
 import DeleteIcon from '@mui/icons-material/Delete';
 import { TransactionFromApi } from '@/shared/types/types-transaction';
 import { formatMonth } from '@/shared/helpers';
+import { TYPE_TRANSACTION} from '@/shared/constants'
 
 type Props = {
   month: string;
@@ -28,7 +29,7 @@ export default function TransactionGroup({ month, transactions, onDelete }: Prop
                 }
               >
                 <ListItemText
-                  primary={`${type === 'REVENU' ? '+' : '-'} ${montant.toFixed(2)} € — ${categorie?.nom ?? 'Catégorie inconnue'}`}
+                  primary={`${type === TYPE_TRANSACTION.REVENU ? '+' : '-'} ${montant.toFixed(2)} € — ${categorie?.nom ?? 'Catégorie inconnue'}`}
                   secondary={new Date(date).toLocaleDateString()}
                   slotProps={{ primary: { sx: { color: 'white' } }, secondary: { sx: { color: 'rgba(255,255,255,0.7)' } } }}
                 />

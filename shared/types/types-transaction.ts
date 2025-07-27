@@ -1,4 +1,6 @@
-import { TypeTransaction } from '@/infrastructure/repositories/client';
+import { TYPE_TRANSACTION } from '../constants';
+
+export type TypeTransaction = typeof TYPE_TRANSACTION[keyof typeof TYPE_TRANSACTION];
 
 export type TransactionFromApi = {
   id: number;

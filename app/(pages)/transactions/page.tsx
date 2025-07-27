@@ -5,12 +5,12 @@ import { Container, Typography, Box, Paper } from '@mui/material';
 import TransactionForm from './_components/TransactionForm';
 import TransactionList from './_components/TransactionList';
 import { TransactionFromApi, Category, FormState } from '@/shared/types/types-transaction';
-import { TypeTransaction } from '@/infrastructure/repositories/client';
+import { TYPE_TRANSACTION} from '@/shared/constants'
 
 export default function TransactionsPage() {
   const [transactions, setTransactions] = useState<TransactionFromApi[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
-  const [form, setForm] = useState<FormState>({ date: '', type: TypeTransaction.REVENU, category: '', amount: '' });
+  const [form, setForm] = useState<FormState>({ date: '', type: TYPE_TRANSACTION.REVENU, category: '', amount: '' });
 
   useEffect(() => {
     fetch('/api/categorieTransaction')
@@ -50,7 +50,7 @@ export default function TransactionsPage() {
 
       const newTransaction: TransactionFromApi = await response.json();
       setTransactions((prev) => [newTransaction, ...prev]);
-      setForm({ date: '', type: TypeTransaction.REVENU, category: '', amount: '' });
+      setForm({ date: '', type: TYPE_TRANSACTION.REVENU, category: '', amount: '' });
     } catch (error) {
       alert((error as Error).message);
     }

@@ -1,8 +1,8 @@
 import React from 'react';
 import { TextField, Select, MenuItem, InputLabel, FormControl, Grid } from '@mui/material';
 import CustomButton from '@/components/CustomButton/CustomButton';
-import { FormState, Category } from '@/shared/types/types-transaction';
-import { TypeTransaction } from '@/infrastructure/repositories/client';
+import { FormState, Category, TypeTransaction } from '@/shared/types/types-transaction';
+import { TYPE_TRANSACTION} from '@/shared/constants'
 
 type Props = {
   form: FormState;
@@ -48,8 +48,8 @@ export default function TransactionForm({ form, categories, onChange, onSubmit }
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: 'rgba(103, 58, 183, 1)' },
               }}
             >
-              <MenuItem value={TypeTransaction.REVENU}>Revenu</MenuItem>
-              <MenuItem value={TypeTransaction.DEPENSE}>Dépense</MenuItem>
+              <MenuItem value={TYPE_TRANSACTION.REVENU}>Revenu</MenuItem>
+              <MenuItem value={TYPE_TRANSACTION.DEPENSE}>Dépense</MenuItem>
             </Select>
           </FormControl>
         </Grid>

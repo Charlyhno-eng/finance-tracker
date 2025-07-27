@@ -29,7 +29,9 @@ The main dashboard provides a comprehensive overview of your financial status:
 
 ![Transactions Page](./public/overview_transactions_page.png)
 
-#### Config page
+#### Management page
+
+![Management Page](./public/overview_gestion_page.png)
 
 ---
 
