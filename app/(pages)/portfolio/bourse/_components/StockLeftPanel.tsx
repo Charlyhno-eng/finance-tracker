@@ -1,10 +1,11 @@
 'use client';
 
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import CustomCard from '@/components/CustomCard/CustomCard';
 import PieChart from '@/components/Charts/PieChart/PieChart';
 import { Props } from '../page';
 import { calculateTotalValue } from '@/core/domain/finance/calculateTotalValue';
+import PortfolioTypography from '@/components/PortfolioTypography/PortfolioTypography';
 
 export default function StockLeftPanel({ stockData }: Props) {
   const total: number = calculateTotalValue(stockData);
@@ -13,9 +14,9 @@ export default function StockLeftPanel({ stockData }: Props) {
     <Grid container direction="column" spacing={2} sx={{ height: '100%' }}>
       <Grid size={12} sx={{ height: 'calc(25% - 8px)' }}>
         <CustomCard title="Valeur du PEA" sx={{ height: '100%' }}>
-          <Typography sx={{ fontSize: 36, fontWeight: 'bold', color: '#7F00FF', letterSpacing: 1 }}>
+          <PortfolioTypography>
             {total.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}{' '}€
-          </Typography>
+          </PortfolioTypography>
         </CustomCard>
       </Grid>
 

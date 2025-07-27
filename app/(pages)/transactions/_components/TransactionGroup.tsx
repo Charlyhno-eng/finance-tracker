@@ -1,13 +1,13 @@
 import React from 'react';
 import { Box, Typography, Paper, List, ListItem, ListItemText, Divider, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { TransactionFromApi } from '@/shared/types/types-transaction';
+import { TransactionWithCategorie } from '@/shared/types/types-transaction';
 import { formatMonth } from '@/shared/helpers';
 import { TYPE_TRANSACTION} from '@/shared/constants'
 
 type Props = {
   month: string;
-  transactions: TransactionFromApi[];
+  transactions: TransactionWithCategorie[];
   onDelete: (id: number) => void;
 };
 

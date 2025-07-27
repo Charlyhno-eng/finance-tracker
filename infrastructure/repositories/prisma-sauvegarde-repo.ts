@@ -7,6 +7,7 @@ export const prismaSauvegardeRepository: SauvegardeRepository = {
   findAll: async () => {
     return prisma.sauvegarde.findMany({
       orderBy: { date: 'desc' },
+      take: 12,
     })
   },
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Typography } from '@mui/material';
-import { TransactionFromApi } from '@/shared/types/types-transaction';
+import { TransactionWithCategorie } from '@/shared/types/types-transaction';
 import TransactionGroup from './TransactionGroup';
 
 type Props = {
-  groupedTransactions: Record<string, TransactionFromApi[]>;
+  groupedTransactions: Record<string, TransactionWithCategorie[]>;
   onDelete: (id: number) => void;
 };
 

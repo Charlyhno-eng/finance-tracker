@@ -17,6 +17,8 @@ The main dashboard provides a comprehensive overview of your financial status:
 
 #### Main page
 
+![Main Page](./public/overview_main_page.png)
+
 #### Account page
 
 ![Account Page](./public/overview_account_page.png)

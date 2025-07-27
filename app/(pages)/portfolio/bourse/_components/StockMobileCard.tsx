@@ -4,6 +4,7 @@ import { Box, Typography } from '@mui/material';
 import CustomCard from '@/components/CustomCard/CustomCard';
 import { Props } from '../page';
 import { calculateTotalValue } from '@/core/domain/finance/calculateTotalValue';
+import PortfolioTypography from '@/components/PortfolioTypography/PortfolioTypography';
 
 export default function StockMobileCard({ stockData }: Props) {
   const total: number = calculateTotalValue(stockData);
@@ -11,9 +12,9 @@ export default function StockMobileCard({ stockData }: Props) {
   return (
     <Box sx={{ display: { xs: 'block', md: 'none' }, mt: 4 }}>
       <CustomCard title="Valeur du PEA" sx={{ mb: 2 }}>
-        <Typography sx={{ fontSize: 30, fontWeight: 'bold', color: '#7F00FF' }}>
+        <PortfolioTypography>
           {total.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}{' '}€
-        </Typography>
+        </PortfolioTypography>
       </CustomCard>
 
       <CustomCard title="Mon PEA">

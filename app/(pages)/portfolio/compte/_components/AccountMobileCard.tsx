@@ -4,6 +4,7 @@ import { Box, Typography } from '@mui/material';
 import CustomCard from '@/components/CustomCard/CustomCard';
 import { calculateTotalAmount } from '@/core/domain/finance/calculateTotalAmount';
 import { Account } from '@/shared/types/types-compte';
+import PortfolioTypography from '@/components/PortfolioTypography/PortfolioTypography';
 
 export default function AccountMobileCard({ accountData }: { accountData: Account[] }) {
   const total: number = calculateTotalAmount(accountData);
@@ -11,9 +12,9 @@ export default function AccountMobileCard({ accountData }: { accountData: Accoun
   return (
     <Box sx={{ display: { xs: 'block', md: 'none' }, mt: 4 }}>
       <CustomCard title="Valeur totale" sx={{ mb: 2 }}>
-        <Typography sx={{ fontSize: 30, fontWeight: 'bold', color: '#7F00FF' }}>
+        <PortfolioTypography>
           {total.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}{' '}€
-        </Typography>
+        </PortfolioTypography>
       </CustomCard>
 
       <CustomCard title="Mes comptes">

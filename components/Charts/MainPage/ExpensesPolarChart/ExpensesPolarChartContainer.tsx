@@ -1,59 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import ExpensesPolarChart from './ExpensesPolarChart';
-import { TransactionFromApi, Category } from '@/shared/types/types-transaction';
-import { TypeTransaction } from '@/infrastructure/repositories/client';
+'use client';
 
-type DataSet = {
+import ExpensesPolarChart from './ExpensesPolarChart';
+
+type ExpensesPolarChartContainerProps = {
   labels: string[];
   data: number[];
 };
 
-export default function ExpensesPolarChartContainer() {
-  const [transactions, setTransactions] = useState<TransactionFromApi[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [dataSet, setDataSet] = useState<DataSet>({ labels: [], data: [] });
+export default function ExpensesPolarChartContainer({ labels, data }: ExpensesPolarChartContainerProps) {
+  if (data.length === 0) {
+    return <p>Aucune dépense ce mois-ci.</p>;
+  }
 
-  useEffect(() => {
-    fetch('/api/categorieTransaction')
-      .then(res => res.json())
-      .then((cats: Category[]) => setCategories(cats))
-      .catch(() => alert('Erreur chargement catégories'));
-
-    fetch('/api/transaction')
-      .then(res => res.json())
-      .then((txs: TransactionFromApi[]) => setTransactions(txs))
-      .catch(() => alert('Erreur chargement transactions'));
-  }, []);
-
-  useEffect(() => {
-    if (transactions.length === 0 || categories.length === 0) return;
-
-    const depenses = transactions.filter(tx => tx.type === TypeTransaction.DEPENSE);
-    const sommeParCategorie: Record<number, number> = {};
-
-    depenses.forEach(tx => {
-      const catId = tx.categorie.id;
-      sommeParCategorie[catId] = (sommeParCategorie[catId] || 0) + tx.montant;
-    });
-
-    const labels: string[] = [];
-    const data: number[] = [];
-
-    categories.forEach(cat => {
-      if (sommeParCategorie[cat.id]) {
-        labels.push(cat.nom);
-        data.push(sommeParCategorie[cat.id]);
-      }
-    });
-
-    setDataSet({ labels, data });
-  }, [transactions, categories]);
-
-  return (
-    <div>
-      {dataSet.data.length === 0 ? (<p>Aucune dépense ce mois-ci.</p> ) : (
-        <ExpensesPolarChart labels={dataSet.labels} data={dataSet.data} />
-      )}
-    </div>
-  );
+  return <ExpensesPolarChart labels={labels} data={data} />;
 }

@@ -4,11 +4,11 @@ import React, { useEffect, useState } from 'react';
 import { Container, Typography, Box, Paper } from '@mui/material';
 import TransactionForm from './_components/TransactionForm';
 import TransactionList from './_components/TransactionList';
-import { TransactionFromApi, Category, FormState } from '@/shared/types/types-transaction';
+import { TransactionWithCategorie, Category, FormState } from '@/shared/types/types-transaction';
 import { TYPE_TRANSACTION} from '@/shared/constants'
 
 export default function TransactionsPage() {
-  const [transactions, setTransactions] = useState<TransactionFromApi[]>([]);
+  const [transactions, setTransactions] = useState<TransactionWithCategorie[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [form, setForm] = useState<FormState>({ date: '', type: TYPE_TRANSACTION.REVENU, category: '', amount: '' });
 
@@ -20,7 +20,7 @@ export default function TransactionsPage() {
 
     fetch('/api/transaction')
       .then((res) => res.json())
-      .then((data: TransactionFromApi[]) => setTransactions(data))
+      .then((data: TransactionWithCategorie[]) => setTransactions(data))
       .catch(() => alert('Échec du chargement des transactions'));
   }, []);
 
@@ -48,7 +48,7 @@ export default function TransactionsPage() {
 
       if (!response.ok) throw new Error('Failed to create transaction');
 
-      const newTransaction: TransactionFromApi = await response.json();
+      const newTransaction: TransactionWithCategorie = await response.json();
       setTransactions((prev) => [newTransaction, ...prev]);
       setForm({ date: '', type: TYPE_TRANSACTION.REVENU, category: '', amount: '' });
     } catch (error) {
@@ -66,7 +66,7 @@ export default function TransactionsPage() {
     }
   };
 
-  const groupedTransactions = transactions.reduce<Record<string, TransactionFromApi[]>>(
+  const groupedTransactions = transactions.reduce<Record<string, TransactionWithCategorie[]>>(
     (groups, transaction) => {
       const month = transaction.date.slice(0, 7);
       if (!groups[month]) groups[month] = [];

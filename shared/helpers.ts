@@ -62,18 +62,7 @@ export function getLast12MonthsLabels(): string[] {
  * @returns {string[]} An array of hex color strings.
  */
 export function generateColors(count: number): string[] {
-  const baseColors = [
-    '#7F00FF',
-    '#00BFFF',
-    '#8A2BE2',
-    '#1E90FF',
-    '#9932CC',
-    '#00FFFF',
-    '#DA70D6',
-    '#6495ED',
-    '#BA55D3',
-    '#5F9EA0',
-  ];
+  const baseColors = ['#7F00FF','#00BFFF','#8A2BE2','#1E90FF','#9932CC','#00FFFF','#DA70D6','#6495ED','#BA55D3','#5F9EA0'];
 
   const colors = [];
   for (let i = 0; i < count; i++) {
@@ -81,4 +70,29 @@ export function generateColors(count: number): string[] {
   }
 
   return colors;
+}
+
+/**
+ * Formats a number as a percentage string with two decimal places.
+ *
+ * @param {number} value - The numeric value to format as a percentage.
+ * @returns {string} The formatted percentage string (e.g., "12.34 %").
+ */
+export function formatPct(value: number) {
+  return `${value.toFixed(2)} %`;
+}
+
+/**
+ * Takes an object containing multiple numeric arrays and returns a new object
+ * where each array is reversed. Does not mutate the original arrays.
+ *
+ * @param series - An object with keys as strings and values as number arrays.
+ * @returns A new object with the same keys but with each array reversed.
+ */
+export function reverseAllSeries(series: Record<string, number[]>) {
+  const reversed: Record<string, number[]> = {};
+  for (const key in series) {
+    reversed[key] = [...series[key]].reverse();
+  }
+  return reversed;
 }
