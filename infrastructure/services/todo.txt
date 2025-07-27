@@ -1,4 +1,0 @@
-récupération des données crypto et bourse dans infra/services
-
-npm install yahoo-finance2
-npm install node-fetch
