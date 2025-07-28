@@ -17,8 +17,8 @@ export async function POST(request: NextRequest) {
   if (sauvegardes.length === 0) {
     const created = await addSauvegarde({
       date: now,
-      totalCompte: 0,
-      totalCrypto: total,
+      totalCompte: total,
+      totalCrypto: 0,
       totalBourse: 0,
     });
     return NextResponse.json(created, { status: 201 });
@@ -30,13 +30,13 @@ export async function POST(request: NextRequest) {
   const lastYear = lastDate.getFullYear();
 
   if (lastMonth === currentMonth && lastYear === currentYear) {
-    const updated = await modifySauvegarde(last.id, { totalCrypto: total });
+    const updated = await modifySauvegarde(last.id, { totalCompte: total });
     return NextResponse.json(updated, { status: 200 });
   } else {
     const created = await addSauvegarde({
       date: now,
-      totalCrypto: total,
-      totalCompte: last.totalCompte,
+      totalCompte: total,
+      totalCrypto: last.totalCrypto,
       totalBourse: last.totalBourse,
     });
     return NextResponse.json(created, { status: 201 });

@@ -25,6 +25,7 @@ export default function CryptoMainChart({ cryptoData }: { cryptoData: CryptoWith
       const res = await fetch(`/api/crypto/${cryptoId}`, { method: 'DELETE' });
       if (!res.ok) throw new Error('Échec de la suppression');
       setData(current => current.filter((_, i) => i !== index));
+      window.location.reload();
     } catch (err) {
       alert((err as Error).message);
     }
@@ -42,6 +43,7 @@ export default function CryptoMainChart({ cryptoData }: { cryptoData: CryptoWith
       const addedCrypto = await response.json();
       const usdcPrice = 0.86;
       setData([...data, { ...addedCrypto, price: usdcPrice, amount: 1 }]);
+      window.location.reload();
     } catch (err) {
       alert((err as Error).message);
     }
@@ -64,6 +66,7 @@ export default function CryptoMainChart({ cryptoData }: { cryptoData: CryptoWith
       });
 
       if (!res.ok) throw new Error('Erreur lors de la mise à jour');
+      window.location.reload();
     } catch (err) {
       alert((err as Error).message);
     }
