@@ -4,7 +4,7 @@ import { SauvegardeRepository } from '@/core/ports/sauvegarde-repo'
 const prisma = new PrismaClient()
 
 export const prismaSauvegardeRepository: SauvegardeRepository = {
-  findAll: async () => {
+  find12LastMonths: async () => {
     return prisma.sauvegarde.findMany({
       orderBy: { date: 'desc' },
       take: 12,

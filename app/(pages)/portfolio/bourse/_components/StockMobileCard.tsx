@@ -3,7 +3,7 @@
 import { Box, Typography } from '@mui/material';
 import CustomCard from '@/components/CustomCard/CustomCard';
 import { Props } from '../page';
-import { calculateTotalValue } from '@/core/domain/finance/calculateTotalValue';
+import { calculateTotalValue } from '@/core/domain/calculateTotalValue';
 import PortfolioTypography from '@/components/PortfolioTypography/PortfolioTypography';
 
 export default function StockMobileCard({ stockData }: Props) {

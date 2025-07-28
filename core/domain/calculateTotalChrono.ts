@@ -7,10 +7,6 @@
  * @param {number[]} stock - Array of stock values.
  * @returns {number[]} Array containing the sum of the corresponding elements.
  */
-export function calculateTotalChrono(
-  account: number[],
-  crypto: number[],
-  stock: number[]
-): number[] {
+export function calculateTotalChrono(account: number[],crypto: number[],stock: number[]): number[] {
   return account.map((value, index) => value + crypto[index] + stock[index]);
 }

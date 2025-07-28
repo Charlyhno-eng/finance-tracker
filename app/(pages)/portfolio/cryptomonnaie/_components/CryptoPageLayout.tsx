@@ -3,9 +3,9 @@
 import { Box, Grid } from '@mui/material';
 import CryptoRightPanel from './CryptoRightPanel';
 import CryptoLeftPanel from './CryptoLeftPanel';
-import { Props } from '../page';
+import { CryptoWithPrice } from '@/shared/types/type-crypto';
 
-export default function CryptoPageLayout({ cryptoData }: Props) {
+export default function CryptoPageLayout({ cryptoData }: { cryptoData: CryptoWithPrice[] }) {
   return (
     <Box sx={{ display: { xs: 'none', md: 'block' }, height: '100%' }}>
       <Grid container spacing={2} sx={{ height: '100%' }}>

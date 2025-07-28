@@ -4,7 +4,7 @@ import { Box, Grid } from '@mui/material';
 import CustomCard from '@/components/CustomCard/CustomCard';
 import PieChart from '@/components/Charts/PieChart/PieChart';
 import { Account } from '@/shared/types/types-compte';
-import { calculateTotalAmount } from '@/core/domain/finance/calculateTotalAmount';
+import { calculateTotalAmount } from '@/core/domain/calculateTotalAmount';
 import PortfolioTypography from '@/components/PortfolioTypography/PortfolioTypography';
 
 export default function AccountLeftPanel({ accountData }: { accountData: Account[] }) {

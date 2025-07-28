@@ -3,11 +3,11 @@
 import { Box, Grid } from '@mui/material';
 import CustomCard from '@/components/CustomCard/CustomCard';
 import PieChart from '@/components/Charts/PieChart/PieChart';
-import { Props } from '../page';
-import { calculateTotalValue } from '@/core/domain/finance/calculateTotalValue';
+import { calculateTotalValue } from '@/core/domain/calculateTotalValue';
 import PortfolioTypography from '@/components/PortfolioTypography/PortfolioTypography';
+import { CryptoWithPrice } from '@/shared/types/type-crypto';
 
-export default function CryptoLeftPanel({ cryptoData }: Props) {
+export default function CryptoLeftPanel({ cryptoData }: { cryptoData: CryptoWithPrice[] }) {
   const total: number = calculateTotalValue(cryptoData);
 
   return (

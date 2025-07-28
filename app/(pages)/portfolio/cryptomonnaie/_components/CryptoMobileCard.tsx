@@ -2,11 +2,11 @@
 
 import { Box, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
 import CustomCard from '@/components/CustomCard/CustomCard';
-import { Props } from '../page';
-import { calculateTotalValue } from '@/core/domain/finance/calculateTotalValue';
+import { calculateTotalValue } from '@/core/domain/calculateTotalValue';
 import PortfolioTypography from '@/components/PortfolioTypography/PortfolioTypography';
+import { CryptoWithPrice } from '@/shared/types/type-crypto';
 
-export default function CryptoMobileCard({ cryptoData }: Props) {
+export default function CryptoMobileCard({ cryptoData }: { cryptoData: CryptoWithPrice[] }) {
   const total: number = calculateTotalValue(cryptoData);
 
   return (
@@ -33,7 +33,7 @@ export default function CryptoMobileCard({ cryptoData }: Props) {
                   key={index}
                   sx={{
                     backgroundColor: 'rgba(103, 58, 183, 0.03)',
-                    border: crypto.staked ? '2px solid #7F00FF' : '1px solid rgba(255, 255, 255, 0.1)',
+                    border: crypto.stacking ? '2px solid #7F00FF' : '1px solid rgba(255, 255, 255, 0.1)',
                     '&:hover': { backgroundColor: 'rgba(103, 58, 183, 0.07)' },
                   }}
                 >

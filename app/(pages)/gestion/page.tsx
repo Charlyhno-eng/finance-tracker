@@ -5,7 +5,7 @@ import { Box, Grid, Typography, TextField, List, ListItem, ListItemText, Paper }
 import CustomCard from '@/components/CustomCard/CustomCard';
 import CustomButton from '@/components/CustomButton/CustomButton';
 import { CoinListItem } from '@/shared/types/type-gestion';
-import { searchCoinBySymbol } from '@/core/services/coingecko';
+import { searchCoinBySymbol } from '@/core/services/coingecko-service';
 
 export default function ManagingPage() {
   const [ticker, setTicker] = useState('');

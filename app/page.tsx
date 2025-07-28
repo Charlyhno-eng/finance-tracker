@@ -5,12 +5,12 @@ import ExpensesPolarChartContainer from '@/components/Charts/MainPage/ExpensesPo
 import WealthChartContainer from '@/components/Charts/MainPage/WealthEvolutionChart/WealthEvolutionChartContainer';
 import { prismaSauvegardeRepository } from '@/infrastructure/repositories/prisma-sauvegarde-repo';
 import { getExpensesChartData } from '@/core/services/expenses-service';
-import { calculateMonthlyPnL } from '@/core/domain/finance/calculateMonthlyPnL';
-import { calculateTotalChrono } from '@/core/domain/finance/calculateTotalChrono';
+import { calculateMonthlyPnL } from '@/core/domain/calculateMonthlyPnL';
+import { calculateTotalChrono } from '@/core/domain/calculateTotalChrono';
 import PortfolioTypography from '@/components/PortfolioTypography/PortfolioTypography';
 
 export default async function Home() {
-  const sauvegardes = await prismaSauvegardeRepository.findAll();
+  const sauvegardes = await prismaSauvegardeRepository.find12LastMonths();
   const labels = getLast12MonthsLabels();
 
   const { labels: expenseLabels, data: expenseData } = await getExpensesChartData();

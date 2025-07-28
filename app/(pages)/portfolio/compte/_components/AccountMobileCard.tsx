@@ -2,7 +2,7 @@
 
 import { Box, Typography } from '@mui/material';
 import CustomCard from '@/components/CustomCard/CustomCard';
-import { calculateTotalAmount } from '@/core/domain/finance/calculateTotalAmount';
+import { calculateTotalAmount } from '@/core/domain/calculateTotalAmount';
 import { Account } from '@/shared/types/types-compte';
 import PortfolioTypography from '@/components/PortfolioTypography/PortfolioTypography';
 

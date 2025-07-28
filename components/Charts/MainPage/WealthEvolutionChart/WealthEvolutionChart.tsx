@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Legend } from 'chart.js';
-import { calculateTotalChrono } from '@/core/domain/finance/calculateTotalChrono';
+import { calculateTotalChrono } from '@/core/domain/calculateTotalChrono';
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Legend);
 

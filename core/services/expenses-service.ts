@@ -1,7 +1,17 @@
 import { prismaCategorieTransactionRepository } from '@/infrastructure/repositories/prisma-categorie-transaction-repo';
 import { prismaTransactionRepository } from '@/infrastructure/repositories/prisma-transaction-repo';
-import { TYPE_TRANSACTION} from '@/shared/constants'
+import { TYPE_TRANSACTION } from '@/shared/constants';
 
+/**
+ * Retrieves expense data grouped by category for use in chart visualizations.
+ *
+ * @returns {Promise<{ labels: string[]; data: number[] }>}
+ * A promise that resolves to an object containing:
+ * - `labels`: an array of category names
+ * - `data`: an array of total expense amounts corresponding to each category
+ *
+ * @throws Will throw if fetching transactions or categories fails.
+ */
 export async function getExpensesChartData() {
   const [transactions, categories] = await Promise.all([
     prismaTransactionRepository.findAll(),
