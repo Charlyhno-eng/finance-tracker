@@ -1,6 +1,6 @@
 # Finance Tracker
 
-**Finance Tracker** is a personal wealth management application that helps you monitor your assets, manage your finances, and track investments across different markets. The goal is to give you full visibility into your financial situation and identify optimization opportunities.
+**Finance Tracker** is a personal wealth management application that helps you monitor your assets, manage your finances, and track investments across different markets. The goal is to give you full visibility into your financial situation.
 
 ## Features
 
@@ -21,7 +21,7 @@ The main dashboard provides a comprehensive overview of your financial status:
 
 #### Account page
 
-![Account Page](./public/overview_account_page.png)
+![Account Page](./public/overview_compte_page.png)
 
 #### Cryptocurrency page
 
@@ -29,7 +29,7 @@ The main dashboard provides a comprehensive overview of your financial status:
 
 #### Stock Market page
 
-![Stock Page](./public/overview_stock_page.png)
+![Stock Page](./public/overview_bourse_page.png)
 
 #### Transactions page
 
@@ -55,6 +55,8 @@ Divided into 3 main pages:
 * **Stock prices** are fetched from [Yahoo Finance](https://finance.yahoo.com/)
 
 This minimizes the need to input prices manually and ensures accurate performance tracking.
+
+To update each category of the chart on the main page (stock market, crypto, account) simply go to the tabs in portfolio which will directly retrieve the value of the asset.
 
 ### Management Page
 
@@ -92,8 +94,18 @@ tree -d -I "node_modules"
 ```bash
 ├── app
 │   ├── api
-│   │   ├── categoriesTransaction
-│   │   └── transactions
+│   │   ├── bourse
+│   │   │   └── [id]
+│   │   ├── categorieTransaction
+│   │   ├── compte
+│   │   │   └── [id]
+│   │   ├── crypto
+│   │   │   └── [id]
+│   │   ├── sauvegarde
+│   │   │   ├── bourse
+│   │   │   ├── compte
+│   │   │   └── crypto
+│   │   └── transaction
 │   │       └── [id]
 │   └── (pages)
 │       ├── gestion
@@ -114,10 +126,10 @@ tree -d -I "node_modules"
 │   │   └── PieChart
 │   ├── CustomButton
 │   ├── CustomCard
+│   ├── PortfolioTypography
 │   └── Sidebar
 ├── core
 │   ├── domain
-│   │   └── finance
 │   ├── ports
 │   ├── services
 │   └── use-cases
@@ -128,10 +140,9 @@ tree -d -I "node_modules"
 │   │   └── prisma
 │   │       └── migrations
 │   │           └── 20250725185038_init
-│   ├── repositories
-│   │   └── client
-│   │       └── runtime
-│   └── services
+│   └── repositories
+│       └── client
+│           └── runtime
 ├── public
 ├── shared
 │   └── types
