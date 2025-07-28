@@ -1,5 +1,5 @@
-import { CategorieTransaction } from '@/infrastructure/repositories/client';
+import { PrismaCategorieTransaction } from '@/shared/types/types-transaction';
 
 export type CategorieTransactionRepository = {
-  findAll: () => Promise<CategorieTransaction[]>;
+  findAll: () => Promise<PrismaCategorieTransaction[]>;
 };

@@ -1,8 +1,8 @@
-import { Transaction } from '@/infrastructure/repositories/client'
+import { PrismaTransaction } from '@/shared/types/types-transaction';
 
 export type TransactionRepository = {
-  save: (transaction: Omit<Transaction, 'id'>) => Promise<Transaction>
-  findAll: () => Promise<Transaction[]>
-  findById: (id: number) => Promise<Transaction | null>
+  save: (transaction: Omit<PrismaTransaction, 'id'>) => Promise<PrismaTransaction>
+  findAll: () => Promise<PrismaTransaction[]>
+  findById: (id: number) => Promise<PrismaTransaction | null>
   delete: (id: number) => Promise<void>
 }

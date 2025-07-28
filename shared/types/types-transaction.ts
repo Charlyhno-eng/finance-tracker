@@ -2,7 +2,15 @@ import { TYPE_TRANSACTION } from '../constants';
 
 export type TypeTransaction = typeof TYPE_TRANSACTION[keyof typeof TYPE_TRANSACTION];
 
-export type Category = {
+export type PrismaTransaction = {
+  id: number;
+  type: TypeTransaction;
+  montant: number;
+  date: Date;
+  categorieId: number;
+};
+
+export type PrismaCategorieTransaction = {
   id: number;
   nom: string;
 };
@@ -13,7 +21,7 @@ export type TransactionWithCategorie = {
   type: TypeTransaction;
   montant: number;
   categorieId: number;
-  categorie: Category;
+  categorie: PrismaCategorieTransaction;
 };
 
 export type FormState = {

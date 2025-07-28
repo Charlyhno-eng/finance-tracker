@@ -1,7 +1,7 @@
-import { Sauvegarde } from '@/infrastructure/repositories/client'
+import { PrismaSauvegarde } from '@/shared/types/type-sauvegarde'
 
 export type SauvegardeRepository = {
-  find12LastMonths: () => Promise<Sauvegarde[]>
-  create: (data: Omit<Sauvegarde, 'id'>) => Promise<Sauvegarde>
-  update: (id: number, data: Partial<Omit<Sauvegarde, 'id'>>) => Promise<Sauvegarde>
+  find12LastMonths: () => Promise<PrismaSauvegarde[]>
+  create: (data: Omit<PrismaSauvegarde, 'id'>) => Promise<PrismaSauvegarde>
+  update: (id: number, data: Partial<Omit<PrismaSauvegarde, 'id'>>) => Promise<PrismaSauvegarde>
 }

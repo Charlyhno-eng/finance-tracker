@@ -1,8 +1,8 @@
-import { Action } from '@/infrastructure/repositories/client';
+import { PrismaAction } from '@/shared/types/type-bourse';
 
 export type ActionRepository = {
-  findAll: () => Promise<Action[]>;
-  create: (data: Omit<Action, 'id'>) => Promise<Action>;
-  update: (id: number, data: Partial<Omit<Action, 'id'>>) => Promise<Action>;
+  findAll: () => Promise<PrismaAction[]>;
+  create: (data: Omit<PrismaAction, 'id'>) => Promise<PrismaAction>;
+  update: (id: number, data: Partial<Omit<PrismaAction, 'id'>>) => Promise<PrismaAction>;
   delete: (id: number) => Promise<void>;
 };

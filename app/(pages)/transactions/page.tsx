@@ -4,12 +4,12 @@ import React, { useEffect, useState } from 'react';
 import { Container, Typography, Box, Paper } from '@mui/material';
 import TransactionForm from './_components/TransactionForm';
 import TransactionList from './_components/TransactionList';
-import { TransactionWithCategorie, Category, FormState } from '@/shared/types/types-transaction';
+import { TransactionWithCategorie, PrismaCategorieTransaction, FormState } from '@/shared/types/types-transaction';
 import { TYPE_TRANSACTION } from '@/shared/constants';
 
 export default function TransactionsPage() {
   const [transactions, setTransactions] = useState<TransactionWithCategorie[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<PrismaCategorieTransaction[]>([]);
   const [form, setForm] = useState<FormState>({ date: '', type: TYPE_TRANSACTION.REVENU, category: '', amount: '' });
 
   useEffect(() => {

@@ -1,6 +1,6 @@
-import { CategorieTransaction } from '@/infrastructure/repositories/client';
+import { PrismaCategorieTransaction } from '@/shared/types/types-transaction';
 import { CategorieTransactionRepository } from '../ports/categorie-transaction-repo';
 
-export const getAllCategories = (repository: CategorieTransactionRepository) => async (): Promise<CategorieTransaction[]> => {
+export const getAllCategories = (repository: CategorieTransactionRepository) => async (): Promise<PrismaCategorieTransaction[]> => {
   return repository.findAll();
 };

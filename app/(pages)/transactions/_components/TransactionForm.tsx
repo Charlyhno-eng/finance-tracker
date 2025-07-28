@@ -1,12 +1,12 @@
 import React from 'react';
 import { TextField, Select, MenuItem, InputLabel, FormControl, Grid } from '@mui/material';
 import CustomButton from '@/components/CustomButton/CustomButton';
-import { FormState, Category, TypeTransaction } from '@/shared/types/types-transaction';
+import { FormState, PrismaCategorieTransaction, TypeTransaction } from '@/shared/types/types-transaction';
 import { TYPE_TRANSACTION} from '@/shared/constants'
 
 type Props = {
   form: FormState;
-  categories: Category[];
+  categories: PrismaCategorieTransaction[];
   onChange: <K extends keyof FormState>(field: K, value: FormState[K]) => void;
   onSubmit: () => void;
 };

@@ -1,20 +1,20 @@
-import { Action } from '@/infrastructure/repositories/client';
+import { PrismaAction } from '@/shared/types/type-bourse';
 import { ActionRepository } from '../ports/action-repo';
 
-export const getAllActions = (repository: ActionRepository) => async (): Promise<Action[]> => {
+export const getAllActions = (repository: ActionRepository) => async (): Promise<PrismaAction[]> => {
   return repository.findAll();
 };
 
 export const createAction = (repository: ActionRepository) => async (
-  data: Omit<Action, 'id'>
-): Promise<Action> => {
+  data: Omit<PrismaAction, 'id'>
+): Promise<PrismaAction> => {
   return repository.create(data);
 };
 
 export const updateAction = (repository: ActionRepository) => async (
   id: number,
-  data: Partial<Omit<Action, 'id'>>
-): Promise<Action> => {
+  data: Partial<Omit<PrismaAction, 'id'>>
+): Promise<PrismaAction> => {
   return repository.update(id, data);
 };
 

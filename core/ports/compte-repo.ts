@@ -1,6 +1,6 @@
-import { Compte } from '@/infrastructure/repositories/client'
+import { PrismaCompte } from '@/shared/types/types-compte';
 
 export type CompteRepository = {
-  findAll: () => Promise<Compte[]>
-  update: (id: number, data: Partial<Omit<Compte, 'id'>>) => Promise<Compte>
+  findAll: () => Promise<PrismaCompte[]>
+  update: (id: number, data: Partial<Omit<PrismaCompte, 'id'>>) => Promise<PrismaCompte>
 }

@@ -1,15 +1,15 @@
-import { Transaction } from '@/infrastructure/repositories/client'
+import { PrismaTransaction } from '@/shared/types/types-transaction';
 import { TransactionRepository } from '../ports/transaction-repo'
 
-export const createTransaction = (repository: TransactionRepository) => async (data: Omit<Transaction, 'id'>): Promise<Transaction> => {
+export const createTransaction = (repository: TransactionRepository) => async (data: Omit<PrismaTransaction, 'id'>): Promise<PrismaTransaction> => {
   return repository.save(data)
 }
 
-export const getAllTransactions = (repository: TransactionRepository) => async (): Promise<Transaction[]> => {
+export const getAllTransactions = (repository: TransactionRepository) => async (): Promise<PrismaTransaction[]> => {
   return repository.findAll()
 }
 
-export const getTransactionById = (repository: TransactionRepository) => async (id: number): Promise<Transaction | null> => {
+export const getTransactionById = (repository: TransactionRepository) => async (id: number): Promise<PrismaTransaction | null> => {
   return repository.findById(id)
 }
 
