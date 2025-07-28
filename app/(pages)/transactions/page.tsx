@@ -5,7 +5,7 @@ import { Container, Typography, Box, Paper } from '@mui/material';
 import TransactionForm from './_components/TransactionForm';
 import TransactionList from './_components/TransactionList';
 import { TransactionWithCategorie, Category, FormState } from '@/shared/types/types-transaction';
-import { TYPE_TRANSACTION} from '@/shared/constants'
+import { TYPE_TRANSACTION } from '@/shared/constants';
 
 export default function TransactionsPage() {
   const [transactions, setTransactions] = useState<TransactionWithCategorie[]>([]);
@@ -13,15 +13,25 @@ export default function TransactionsPage() {
   const [form, setForm] = useState<FormState>({ date: '', type: TYPE_TRANSACTION.REVENU, category: '', amount: '' });
 
   useEffect(() => {
-    fetch('/api/categorieTransaction')
-      .then((res) => res.json())
-      .then((data: Category[]) => setCategories(data))
-      .catch(() => alert('Échec du chargement des catégories'));
+    const fetchData = async () => {
+      try {
+        const [catRes, txRes] = await Promise.all([
+          fetch('/api/categorieTransaction'),
+          fetch('/api/transaction'),
+        ]);
 
-    fetch('/api/transaction')
-      .then((res) => res.json())
-      .then((data: TransactionWithCategorie[]) => setTransactions(data))
-      .catch(() => alert('Échec du chargement des transactions'));
+        if (!catRes.ok || !txRes.ok) throw new Error('Erreur de chargement');
+
+        const [catData, txData] = await Promise.all([catRes.json(), txRes.json()]);
+
+        setCategories(catData);
+        setTransactions(txData);
+      } catch {
+        alert('Erreur lors du chargement des données');
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleChange = <K extends keyof FormState>(field: K, value: FormState[K]) => {
@@ -30,7 +40,7 @@ export default function TransactionsPage() {
 
   const handleSubmit = async () => {
     if (!form.date || !form.category || form.amount === '') {
-      alert('Please fill date, category and amount');
+      alert('Veuillez remplir la date, la catégorie et le montant');
       return;
     }
 
@@ -46,7 +56,7 @@ export default function TransactionsPage() {
         }),
       });
 
-      if (!response.ok) throw new Error('Failed to create transaction');
+      if (!response.ok) throw new Error('Échec de la création de la transaction');
 
       const newTransaction: TransactionWithCategorie = await response.json();
       setTransactions((prev) => [newTransaction, ...prev]);
