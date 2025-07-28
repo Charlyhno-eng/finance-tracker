@@ -10,3 +10,10 @@ export const createSauvegarde = (repo: SauvegardeRepository) => async (
 ): Promise<Sauvegarde> => {
   return repo.create(data)
 }
+
+export const updateSauvegarde = (repo: SauvegardeRepository) => async (
+  id: number,
+  data: Partial<Omit<Sauvegarde, 'id'>>
+): Promise<Sauvegarde> => {
+  return repo.update(id, data)
+}

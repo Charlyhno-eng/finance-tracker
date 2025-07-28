@@ -14,4 +14,11 @@ export const prismaSauvegardeRepository: SauvegardeRepository = {
   create: async (data) => {
     return prisma.sauvegarde.create({ data })
   },
+
+  update: async (id, data) => {
+    return prisma.sauvegarde.update({
+      where: { id },
+      data,
+    })
+  },
 }
