@@ -25,7 +25,7 @@ The main dashboard provides a comprehensive overview of your financial status:
 
 #### Cryptocurrency page
 
-![Crypto Page](./public/overview_crypto_page.png)
+![Crypto Page](./public/overview_cryptomonnaie_page.png)
 
 #### Stock Market page
 

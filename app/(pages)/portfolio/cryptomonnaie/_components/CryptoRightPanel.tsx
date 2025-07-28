@@ -8,12 +8,10 @@ import SaveIcon from '@mui/icons-material/Save';
 import CustomCard from '@/components/CustomCard/CustomCard';
 import { formatDate } from '@/shared/helpers';
 import { CryptoWithPrice } from '@/shared/types/type-crypto';
-import { useRouter } from 'next/navigation';
 
 export default function CryptoMainChart({ cryptoData }: { cryptoData: CryptoWithPrice[] }) {
   const today = formatDate(new Date());
   const [data, setData] = useState<CryptoWithPrice[]>(cryptoData);
-  const router = useRouter();
 
   const handleChange = ( index: number, field: keyof CryptoWithPrice, value: string | number | boolean) => {
     const updated = [...data];
@@ -24,48 +22,50 @@ export default function CryptoMainChart({ cryptoData }: { cryptoData: CryptoWith
   const handleDelete = async (index: number) => {
     const cryptoId = data[index].id;
     try {
-      await fetch(`/api/crypto/${cryptoId}`, { method: 'DELETE' });
-      router.refresh();
-    } catch (error) {
-      console.error('Erreur lors de la suppression:', error);
+      const res = await fetch(`/api/crypto/${cryptoId}`, { method: 'DELETE' });
+      if (!res.ok) throw new Error('Échec de la suppression');
+      setData(current => current.filter((_, i) => i !== index));
+    } catch (err) {
+      alert((err as Error).message);
     }
   };
 
   const handleAdd = async () => {
-    const newCrypto = { ticker: '-', nom: '-', price: 0, amount: 0, stacking: false };
+    const newCrypto = { ticker: 'USDC', nom: 'usd-coin', quantite: 1, stacking: false };
     try {
       const response = await fetch('/api/crypto', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newCrypto),
       });
+
       const addedCrypto = await response.json();
-      setData([...data, addedCrypto]);
-      router.refresh();
-    } catch (error) {
-      console.error("Erreur lors de l'ajout:", error);
+      const usdcPrice = 0.86;
+      setData([...data, { ...addedCrypto, price: usdcPrice, amount: 1 }]);
+    } catch (err) {
+      alert((err as Error).message);
     }
   };
 
   const handleUpdate = async (index: number) => {
     const crypto = data[index];
     const updatedCrypto = {
-      ticker: crypto.ticker,
       nom: crypto.nom,
-      price: crypto.price,
-      amount: crypto.amount,
-      stacking: crypto.stacking
+      ticker: crypto.ticker,
+      quantite: crypto.amount,
+      stacking: crypto.stacking,
     };
 
     try {
-      await fetch(`/api/crypto/${crypto.id}`, {
+      const res = await fetch(`/api/crypto/${crypto.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedCrypto),
       });
-      router.refresh();
-    } catch (error) {
-      console.error('Erreur lors de la mise à jour:', error);
+
+      if (!res.ok) throw new Error('Erreur lors de la mise à jour');
+    } catch (err) {
+      alert((err as Error).message);
     }
   };
 
@@ -92,9 +92,7 @@ export default function CryptoMainChart({ cryptoData }: { cryptoData: CryptoWith
                   key={crypto.id}
                   sx={{
                     bgcolor: 'rgba(103, 58, 183, 0.03)',
-                    border: crypto.stacking
-                      ? '2px solid #7F00FF'
-                      : '1px solid rgba(255, 255, 255, 0.1)',
+                    border: crypto.stacking ? '2px solid #7F00FF' : '1px solid rgba(255, 255, 255, 0.1)',
                     '&:hover': { bgcolor: 'rgba(103, 58, 183, 0.07)' }
                   }}
                 >
@@ -114,7 +112,9 @@ export default function CryptoMainChart({ cryptoData }: { cryptoData: CryptoWith
                     <Typography sx={{ color: '#fff' }}>{montant.toFixed(2)} €</Typography>
                   </TableCell>
                   <TableCell sx={{ color: '#fff' }}>
-                    <Typography sx={{ color: '#fff' }}>{crypto.price.toFixed(4)}</Typography>
+                    <Typography sx={{ color: '#fff' }}>
+                      {typeof crypto.price === 'number' ? crypto.price.toFixed(4) : '—'}
+                    </Typography>
                   </TableCell>
                   <TableCell sx={{ color: '#fff' }}>
                     <TextField
