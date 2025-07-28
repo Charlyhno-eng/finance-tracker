@@ -1,35 +1,40 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, Table, TableBody, TableCell, TableHead, TableRow, TextField } from '@mui/material';
+import { Box, Table, TableBody, TableCell, TableHead, TableRow, TextField, IconButton } from '@mui/material';
 import CustomCard from '@/components/CustomCard/CustomCard';
 import { Account } from '@/shared/types/types-compte';
+import SaveIcon from '@mui/icons-material/Save';
 
 export default function AccountRightPanel({ accountData }: { accountData: Account[] }) {
   const [data, setData] = useState<Account[]>(accountData);
 
-  const handleChange = async (index: number, field: keyof Account, value: string | number) => {
+  const handleChange = (index: number, field: keyof Account, value: string | number) => {
     const updated = [...data];
-    let parsedValue: string | number = value;
-
     if (field === 'amount') {
-      parsedValue = Number(value);
-      if (isNaN(parsedValue)) return;
+      value = Number(value);
+      if (isNaN(value)) return;
     }
-
-    const updatedAccount = { ...updated[index], [field]: parsedValue };
-    updated[index] = updatedAccount;
+    updated[index] = { ...updated[index], [field]: value };
     setData(updated);
+  };
+
+  const handleUpdate = async (index: number) => {
+    const account = data[index];
+    const updatedAccount = {
+      ticker: account.ticker,
+      montant: account.amount,
+    };
 
     try {
-      await fetch(`/api/compte/${updatedAccount.id}`, {
+      const res = await fetch(`/api/compte/${account.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ticker: updatedAccount.ticker,
-          montant: updatedAccount.amount,
-        }),
+        body: JSON.stringify(updatedAccount),
       });
+
+      if (!res.ok) throw new Error('Erreur lors de la mise à jour');
+      window.location.reload();
     } catch (error) {
       alert((error as Error).message);
     }
@@ -43,6 +48,7 @@ export default function AccountRightPanel({ accountData }: { accountData: Accoun
             <TableRow sx={{ bgcolor: 'rgba(103, 58, 183, 0.05)' }}>
               <TableCell sx={{ color: '#fff' }}>Nom</TableCell>
               <TableCell sx={{ color: '#fff' }}>Montant (en €)</TableCell>
+              <TableCell sx={{ color: '#fff' }}></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -73,6 +79,16 @@ export default function AccountRightPanel({ accountData }: { accountData: Accoun
                     slotProps={{ input: { disableUnderline: true, sx: { color: '#fff' } } }}
                     sx={{ width: '100%' }}
                   />
+                </TableCell>
+                <TableCell sx={{ color: '#fff', width: 80 }}>
+                  <IconButton
+                    aria-label="save"
+                    onClick={() => handleUpdate(index)}
+                    size="small"
+                    sx={{ color: '#00e676' }}
+                  >
+                    <SaveIcon fontSize="small" />
+                  </IconButton>
                 </TableCell>
               </TableRow>
             ))}

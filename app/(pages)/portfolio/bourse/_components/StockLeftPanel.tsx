@@ -1,14 +1,25 @@
 'use client';
 
+import { useEffect } from 'react';
 import { Box, Grid } from '@mui/material';
 import CustomCard from '@/components/CustomCard/CustomCard';
 import PieChart from '@/components/Charts/PieChart/PieChart';
-import { Props } from '../page';
+import { Stock } from '@/shared/types/type-bourse';
 import { calculateTotalValue } from '@/core/domain/calculateTotalValue';
 import PortfolioTypography from '@/components/PortfolioTypography/PortfolioTypography';
 
-export default function StockLeftPanel({ stockData }: Props) {
+export default function StockLeftPanel({ stockData }: { stockData: Stock[] }) {
   const total: number = calculateTotalValue(stockData);
+
+  useEffect(() => {
+    if (total === 0) return;
+
+    fetch('/api/sauvegarde/bourse', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ total }),
+    });
+  }, [total]);
 
   return (
     <Grid container direction="column" spacing={2} sx={{ height: '100%' }}>

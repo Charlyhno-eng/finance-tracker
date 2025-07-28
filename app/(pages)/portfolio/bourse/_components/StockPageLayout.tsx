@@ -3,9 +3,9 @@
 import { Box, Grid } from '@mui/material';
 import StockRightPanel from './StockRightPanel';
 import StockLeftPanel from './StockLeftPanel';
-import { Props } from '../page';
+import { Stock } from '@/shared/types/type-bourse';
 
-export default function StockPageLayout({ stockData }: Props) {
+export default function StockPageLayout({ stockData }: { stockData: Stock[] }) {
   return (
     <Box sx={{ display: { xs: 'none', md: 'block' }, height: '100%' }}>
       <Grid container spacing={2} sx={{ height: '100%' }}>

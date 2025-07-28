@@ -74,8 +74,8 @@ export default function CryptoMainChart({ cryptoData }: { cryptoData: CryptoWith
 
   return (
     <CustomCard title="Mes cryptomonnaies" subtitle={`Mise à jour : ${today}`} sx={{ height: '100%' }}>
-      <Box sx={{ height: '100%', overflowY: 'auto' }}>
-        <Table size="small" sx={{ minWidth: 500, mt: 2 }}>
+      <Box sx={{ height: 750, overflowY: 'auto' }}>
+        <Table size="small" sx={{ minWidth: 600, mt: 2 }}>
           <TableHead>
             <TableRow sx={{ bgcolor: 'rgba(103, 58, 183, 0.05)' }}>
               <TableCell sx={{ color: '#fff', width: 80 }}>Ticker</TableCell>

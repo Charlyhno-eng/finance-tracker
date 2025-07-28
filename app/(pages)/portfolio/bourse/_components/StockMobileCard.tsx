@@ -2,11 +2,11 @@
 
 import { Box, Typography } from '@mui/material';
 import CustomCard from '@/components/CustomCard/CustomCard';
-import { Props } from '../page';
+import { Stock } from '@/shared/types/type-bourse';
 import { calculateTotalValue } from '@/core/domain/calculateTotalValue';
 import PortfolioTypography from '@/components/PortfolioTypography/PortfolioTypography';
 
-export default function StockMobileCard({ stockData }: Props) {
+export default function StockMobileCard({ stockData }: { stockData: Stock[] }) {
   const total: number = calculateTotalValue(stockData);
 
   return (
