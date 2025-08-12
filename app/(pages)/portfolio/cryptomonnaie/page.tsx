@@ -1,5 +1,3 @@
-// app/crypto/page.tsx
-
 import { Box } from '@mui/material';
 import CryptoMobileCard from './_components/CryptoMobileCard';
 import CryptoPageLayout from './_components/CryptoPageLayout';

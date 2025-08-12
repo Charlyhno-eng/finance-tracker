@@ -109,7 +109,13 @@ export default function CryptoMainChart({ cryptoData }: { cryptoData: CryptoWith
                     />
                   </TableCell>
                   <TableCell sx={{ color: '#fff' }}>
-                    <Typography sx={{ color: '#fff' }}>{crypto.nom}</Typography>
+                    <TextField
+                      variant="standard"
+                      value={crypto.nom}
+                      onChange={(e) => handleChange(index, 'nom', e.target.value)}
+                      slotProps={{ input: { disableUnderline: true, sx: { color: '#fff' } } }}
+                      sx={{ width: '100%' }}
+                    />
                   </TableCell>
                   <TableCell sx={{ color: '#fff' }}>
                     <Typography sx={{ color: '#fff' }}>{montant.toFixed(2)} €</Typography>
